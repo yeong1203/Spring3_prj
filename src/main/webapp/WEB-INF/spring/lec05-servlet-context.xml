@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc 
+						https://www.springframework.org/schema/mvc/spring-mvc.xsd
+						http://www.springframework.org/schema/beans 
+						https://www.springframework.org/schema/beans/spring-beans.xsd
+						http://www.springframework.org/schema/context 
+						https://www.springframework.org/schema/context/spring-context.xsd">
+
+	<!--  =========================어노테이션 기반으로 동작하겠다.==================== -->
+	<!--
+	<mvc:annotation-driven />
+	-->
+	<!-- 적용대상 패키지 =============================================
+	<context:component-scan base-package="com.lec04.di" />
+	-->
+	
+	<!--로그 출력: log4j -->
+	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
+	<!-- <mvc:resources mapping="/resources/**" location="/resources/" />
+	 -->
+	
+	<!-- DI(생성자) + BeanNameUrlHandlerMapping -->
+	<!-- 생성자에 DI  //emp_list가 들어오면 해당 EmpController에 가서 실행해! 하는 것. 꼭 반드시 메서드 이름이랑 맞춰줘야 실행된다. 
+	<bean class="" />
+	<bean name="/empList" class="com.lec04.di.EmpController" scope="singleton" >
+			<constructor-arg ref="MY_EMPDAO_BEAN_NAME" />
+	</bean>
+	-->
+	<!-- ref="MY_EMPDAO_BEAN_NAME" 는 인스턴스의주소(객체)를 가져가는것
+		<property name="stringTest" value="abc" /> 값이 단일값일때사용
+			// name이 setDao의 이름으로 맵핑 , property 많으면 VO에 담아서 한번에 처리. 
+	
+	<bean name="/empList" class="com.lec04.di.EmpController" scope="singleton" >
+			<property name="dao" ref="MY_EMPDAO_BEAN_NAME" />
+			<property name="stringTest" value="abc" />
+	</bean> -->
+	<!-- /kosta(경로마음)/empList(대신 얘는 함수명이랑 동일해야함. -->
+	
+	
+	<!-- DI(프로퍼티) + SimpleUrlHandlerMapping -->
+	<!--
+	<bean class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+		<property name="mappings">
+			<value>
+			/kosta/user/lkh/empList=MY_EMPCTL_BEAN_NAME
+			/kosta/user/lkh/empDumy=MY_EMPCTL_BEAN_NAME			
+			</value>
+		</property>
+	</bean>	
+		
+ 	<bean name="MY_EMPCTL_BEAN_NAME" class="com.lec04.di.EmpController" scope="singleton">
+		<property name="dao" ref="MY_EMPDAO_BEAN_NAME" />
+		<property name="stringTest" value="abc" />
+	</bean> 
+	// 루프 돌아서 VO가 필요 없다.그래서 단일
+	<bean name="MY_EMPDAO_BEAN_NAME" class="com.lec04.di.EmpDAO" />
+-->
+			
+	<!-- 
+	<bean name="MY_EMPVO_BEAN_NAME" class="com.lec04.di.EmpVO" scope="prototype" />
+	 -->
+	 
+	 <!--  ===============================[어노테이션 기반으로 동작]==================================  -->
+ 
+	<mvc:annotation-driven />
+	<!--  적용 대상 패키지  -->
+	<context:component-scan base-package="com.lec05.board" />
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	<!-- web test 하려면 필요함. (웹서비스)-->
+	<bean name="MY_IR_VIEW_RESOLVER_BEAN_NAME" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/" /><!-- value="/" 단순한 String 값만 처리 받을 때 사용 -->
+		<property name="suffix" value=".jsp" />
+	</bean>
+	<!-- 웹에서 결과 값을 봐야해서 추가 -->
+
+</beans>
