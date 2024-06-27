@@ -23,6 +23,8 @@ local.properties
 .recommenders
 
 log4j.xml
+oracle.properties
+
 
 # External tool builders
 .externalToolBuilders/
